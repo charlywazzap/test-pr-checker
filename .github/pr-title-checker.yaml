@@ -1,0 +1,40 @@
+name: "PR Title Checker"
+on:
+  pull_request:
+    branches:
+    - main
+    types:
+      - opened
+      - edited
+
+jobs:
+  check-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        id: generate-new-access-key
+        run: |
+         ls -ltr .
+         ls -ltr .github/
+      - uses: deepakputhraya/action-pr-title@master
+        id: title-check
+        continue-on-error: true
+        with:
+          regex: 'CER-\d+' # Regex the title should match.
+          # allowed_prefixes: 'feature,fix,JIRA' # title should start with the given prefix
+          # disallowed_prefixes: 'feat/,hotfix' # title should not start with the given prefix
+          # prefix_case_sensitive: false # title prefix are case insensitive
+          # min_length: 5 # Min length of the title
+          # max_length: 20 # Max length of the title
+          # github_token: ${{ github.token }} # Default: ${{ github.token }
+      - uses: actions/checkout@v3
+      - uses: dessant/label-actions@v2
+        if: steps.title-check.outcome != 'success' 
+        with:
+          github-token: ${{ github.token }}
+          config-path: ./.github/pr-check-label.yml
+      - uses: dessant/label-actions@v2
+        if: steps.title-check.outcome == 'success' 
+        with:
+          github-token: ${{ github.token }}
+          config-path: ./.github/pr-check-unlabel.yml

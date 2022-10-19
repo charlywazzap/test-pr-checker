@@ -1,0 +1,3 @@
+title_needs_Jira_ticket:
+  comment: >
+    :wave: @{issue-author}, please add you JIRA ticket on the title.
