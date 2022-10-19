@@ -11,11 +11,6 @@ jobs:
   check-pr-title:
     runs-on: ubuntu-latest
     steps:
-      - name: test
-        id: generate-new-access-key
-        run: |
-         ls -ltr .
-         ls -ltr .github/
       - uses: deepakputhraya/action-pr-title@master
         id: title-check
         continue-on-error: true
