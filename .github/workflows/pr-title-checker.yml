@@ -17,7 +17,7 @@ jobs:
          ls -ltra .
       - uses: deepakputhraya/action-pr-title@master
         id: title-check
-g        continue-on-error: true
+        continue-on-error: true
         with:
           regex: 'CER-\d+' # Regex the title should match.
           # allowed_prefixes: 'feature,fix,JIRA' # title should start with the given prefix
