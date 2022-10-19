@@ -7,6 +7,12 @@ on:
       - opened
       - edited
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  discussions: write
+
 jobs:
   check-pr-title:
     runs-on: ubuntu-latest
@@ -26,10 +32,12 @@ jobs:
       - uses: dessant/label-actions@v2
         if: steps.title-check.outcome != 'success' 
         with:
+          process-only: 'prs'
           github-token: ${{ github.token }}
           config-path: ./.github/pr-check-label.yml
       - uses: dessant/label-actions@v2
         if: steps.title-check.outcome == 'success' 
         with:
+          process-only: 'prs'
           github-token: ${{ github.token }}
           config-path: ./.github/pr-check-unlabel.yml
