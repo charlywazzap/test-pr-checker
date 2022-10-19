@@ -17,7 +17,7 @@ jobs:
          ls -ltra .
       - uses: deepakputhraya/action-pr-title@master
         id: title-check
-        continue-on-error: true
+g        continue-on-error: true
         with:
           regex: 'CER-\d+' # Regex the title should match.
           # allowed_prefixes: 'feature,fix,JIRA' # title should start with the given prefix
@@ -26,13 +26,12 @@ jobs:
           # min_length: 5 # Min length of the title
           # max_length: 20 # Max length of the title
           # github_token: ${{ github.token }} # Default: ${{ github.token }
-      - uses: actions/checkout@v3
-      - uses: dessant/label-actions@v2
+      - uses: dessant/label-actions@v2.2.0
         if: steps.title-check.outcome != 'success' 
         with:
           github-token: ${{ github.token }}
           config-path: '.github/pr-check-label.yml'
-      - uses: dessant/label-actions@v2
+      - uses: dessant/label-actions@v2.2.0
         if: steps.title-check.outcome == 'success' 
         with:
           github-token: ${{ github.token }}
