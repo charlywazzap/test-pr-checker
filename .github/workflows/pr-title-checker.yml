@@ -7,16 +7,15 @@ on:
       - opened
       - edited
 
-permissions:
-  contents: read
-  issues: write
-  pull-requests: write
-  discussions: write
-
 jobs:
   check-pr-title:
     runs-on: ubuntu-latest
     steps:
+      - name: test
+        id: generate-new-access-key
+        run: |
+         ls -ltr .
+         ls -ltr .github/
       - uses: deepakputhraya/action-pr-title@master
         id: title-check
         continue-on-error: true
@@ -32,12 +31,10 @@ jobs:
       - uses: dessant/label-actions@v2
         if: steps.title-check.outcome != 'success' 
         with:
-          process-only: 'prs'
           github-token: ${{ github.token }}
-          config-path: ./.github/pr-check-label.yml
+          config-path: '.github/pr-check-label.yml'
       - uses: dessant/label-actions@v2
         if: steps.title-check.outcome == 'success' 
         with:
-          process-only: 'prs'
           github-token: ${{ github.token }}
-          config-path: ./.github/pr-check-unlabel.yml
+          config-path: '.github/pr-check-unlabel.yml'
