@@ -36,7 +36,4 @@ jobs:
         if: steps.title-check.outcome == 'success' 
         with:
           config_file: .github/pr-check-unlabel.yml
-    - uses: 
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
         

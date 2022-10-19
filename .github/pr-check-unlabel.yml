@@ -1,9 +1,5 @@
 labels:
   - name: title_needs_Jira_ticket
-    labeled:
-      pr:
-        body: ":wave: @{issue-author}, please add you JIRA ticket on the title.".
-
     unlabeled:
       issue:
         body: Thank you for following the template. The repository owner will reply.
