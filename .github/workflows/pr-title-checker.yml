@@ -26,14 +26,16 @@ jobs:
           # min_length: 5 # Min length of the title
           # max_length: 20 # Max length of the title
           # github_token: ${{ github.token }} # Default: ${{ github.token }
-      - name: Label Commenter
-        uses: peaceiris/actions-label-commenter@v1
+
+      - uses: christianvuerings/add-labels@v1
         if: steps.title-check.outcome != 'success' 
         with:
-          config_file: .github/pr-check-label.yml
+          labels: |
+            title_needs_Jira_ticket
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
       - name: Label Commenter
         uses: peaceiris/actions-label-commenter@v1
-        if: steps.title-check.outcome == 'success' 
-        with:
-          config_file: .github/pr-check-unlabel.yml
+        
         
