@@ -1,3 +1,6 @@
-title_needs_Jira_ticket:
-  comment: >
-    :wave: @{issue-author}, please add you JIRA ticket on the title.
+labels:
+  - name: title_needs_Jira_ticket
+    labeled:
+      pr:
+        body: ":wave: @{issue-author}, please add you JIRA ticket on the
+        title.".

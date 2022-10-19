@@ -26,13 +26,17 @@ jobs:
           # min_length: 5 # Min length of the title
           # max_length: 20 # Max length of the title
           # github_token: ${{ github.token }} # Default: ${{ github.token }
-      - uses: dessant/label-actions@v2.2.0
+      - name: Label Commenter
+        uses: peaceiris/actions-label-commenter@v1
         if: steps.title-check.outcome != 'success' 
         with:
-          github-token: ${{ github.token }}
-          config-path: '.github/pr-check-label.yml'
-      - uses: dessant/label-actions@v2.2.0
+          config_file: .github/pr-check-label.yml
+      - name: Label Commenter
+        uses: peaceiris/actions-label-commenter@v1
         if: steps.title-check.outcome == 'success' 
         with:
-          github-token: ${{ github.token }}
-          config-path: '.github/pr-check-unlabel.yml'
+          config_file: .github/pr-check-unlabel.yml
+    - uses: 
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        
